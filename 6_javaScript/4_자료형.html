@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>자료형</title>
+    <script>
+        /*
+            원시 타입
+            원시 타입은 하나의 값만 저장하며, 값 자체가 변수에 직접 저장됩니다.
+
+            Number: 숫자형 데이터, 정수, 살수, 음수, 양수 모두 포함
+                let age = 20
+                let price = 3.14
+            String: 문자열 데이터. 큰따옴표(""), 작은따옴표(''), 백틱(``)
+                let name = "김사과"
+                let name = String("김사과") 서로 다른 형태
+            Bollean: 참(true)/거짓(false)
+                let isLogin = true
+            Undefined: 값이 할당되지 않은 상태. 변수를 선언했지만 값을 할당 하지 않았을 때 자동으로 undefined
+                let value  
+            null: 의도적으로 값이 없음을 표현
+                let data = null
+            BigInt: 매우 큰 정수를 표현. 일반 number로 표현할 수 없는 큰 정수를 다룰 때 사용
+                let bigNum = 1234567890123456789n  끝에 n을 붙혀줌
+                Number.MAX_SAFE_INTEGER = 9007199254740991
+                이값이상일때 BigInt 사용
+            
+
+        */
+       console.log(Number.MAX_SAFE_INTEGER)
+    </script>
+</head>
+<body>
+    <h1>원시 타입 예제</h1>
+    <script>
+        let age = 90071992547409911n
+        let name = "김사과"
+        let isStudent = true
+        let result
+        let data = null
+        console.log("age: ", age, typeof age)
+        console.log("name: ", name, typeof name)
+        console.log("isStudent: ", isStudent, typeof isStudent)
+        console.log("result: ", result, typeof result)
+        console.log("data: ", data, typeof data)
+    </script>
+</body>
+</html>
