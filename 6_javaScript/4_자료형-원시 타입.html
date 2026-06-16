@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>자료형</title>
+    <title>자료형 - 원시 타입</title>
     <script>
         /*
             원시 타입
@@ -26,7 +26,6 @@
                 Number.MAX_SAFE_INTEGER = 9007199254740991
                 이값이상일때 BigInt 사용
             
-
         */
        console.log(Number.MAX_SAFE_INTEGER)
     </script>
@@ -34,12 +33,15 @@
 <body>
     <h1>원시 타입 예제</h1>
     <script>
-        let age = 90071992547409911n
+        let age = 20
         let name = "김사과"
         let isStudent = true
         let result
         let data = null
+        let age2 = age
+        age2 = 25
         console.log("age: ", age, typeof age)
+        console.log("age2: ", age2, typeof age2)
         console.log("name: ", name, typeof name)
         console.log("isStudent: ", isStudent, typeof isStudent)
         console.log("result: ", result, typeof result)
