@@ -12,6 +12,7 @@ class ContactsService:
     def print_contact(contact):
         """조회된 연락처 한 건을 보기 좋은 형식으로 출력한다."""
         
+        
 
     def insert_contact(self):
         """연락처 정보를 입력받아 데이터베이스에 등록한다."""
@@ -34,8 +35,7 @@ class ContactsService:
     def search_contacts(self):
         """이름 또는 전화번호 검색어로 연락처를 찾아 출력한다."""
         keyword = input("검색할 이름 또는 전화번호를 입력하세요: ")
-        contact = Contact(keyword,  keyword)
-        rows = self.dao.search_all(contact)
+        rows = self.dao.search_all(keyword)
         for row in rows:
             if row is None:
                 print("조회할 데이터가 없습니다")
@@ -43,8 +43,32 @@ class ContactsService:
                 print(f"name: {row['name']}, phone: {row['phone']}, address: {row['address']}")
     def edit_contact(self):
         """전화번호로 연락처를 찾은 뒤 새 정보로 수정한다."""
-        pass
+        old_phone = input("변경할 전화번호를 입력하세요: ")
+        result = self.dao.search(old_phone)
 
+        if result is None:
+            print("찾는 연락처가 없습니다")
+            return
+        
+        name = input("변경할 이름을 입력하세요: ")
+        phone = input("변경할 전화번호을 입력하세요: ")
+        address = input("변경할 주소을 입력하세요: ")
+
+        contact = Contact(name, phone, address)
+        result = self.dao.update(contact, old_phone)
+
+        if result is None:
+            print("수정을 실패 하였습니다.")
+        else:
+            print("수정을 성공 하였습니다.")
+
+        
     def delete_contact(self):
         """전화번호로 연락처를 찾아 삭제한다."""
-        pass
+        phone = input("삭제할 전화번호 입력하세요: ")
+        result = self.dao.delete(phone)
+
+        if result is None:
+            print("삭제에 실패 하였습니다.")
+        else:
+            print("삭제에 성공 하였습니다.")

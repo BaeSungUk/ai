@@ -21,7 +21,7 @@ class Contact:
         """공백을 제거하고 비어 있지 않은 이름을 저장한다."""
         # TODO: 앞뒤 공백 제거, 빈 값 검사, 값 저장을 구현하세요.
         if not name:
-            raise ValueError("영어 단어는 비워둘 수 없습니다.")
+            raise ValueError("이름은 비워둘 수 없습니다.")
         self.__name = name
 
     @property
@@ -35,7 +35,7 @@ class Contact:
         """공백을 제거하고 비어 있지 않은 전화번호를 저장한다."""
         # TODO: 앞뒤 공백 제거, 빈 값 검사, 값 저장을 구현하세요.
         if not phone:
-            raise ValueError("영어 단어는 비워둘 수 없습니다.")
+            raise ValueError("전화번호는 비워둘 수 없습니다.")
         self.__phone = phone
 
     @property
@@ -49,5 +49,5 @@ class Contact:
         """주소의 앞뒤 공백을 제거해 저장한다."""
         # TODO: 주소를 정리한 뒤 저장하세요.
         if not address:
-            raise ValueError("영어 단어는 비워둘 수 없습니다.")
+            raise ValueError("주소는 비워둘 수 없습니다.")
         self.__address = address

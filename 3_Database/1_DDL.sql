@@ -5,7 +5,7 @@
     drop: 객체(데이터베이스, 테이블, 뷰, 인덱스 등)를 완전히 삭제
     truncate: 테이블의 모든 데이터를 삭제하지만, 구조는 남김(롤백 불가)
 */
-
+use testdb;
 -- 데이터 베이스 확인하기
 show databases;
 
@@ -81,7 +81,13 @@ alter table member add point int default 1000;
 alter table member modify column point int default 100;
 
 
+CREATE TABLE phonebook (
+ name VARCHAR(50) NOT NULL,
+ phone VARCHAR(30) NOT NULL PRIMARY KEY,
+ address VARCHAR(200)
+);
 
+select * from phonebook;
 
 
 
