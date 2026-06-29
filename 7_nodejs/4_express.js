@@ -103,8 +103,6 @@ app.post("/submit", (req, res) => {
     console.log("age:", age)
     
     res.send("post로 호출!")
-    
-    
 })
 
 app.listen(port, () => {

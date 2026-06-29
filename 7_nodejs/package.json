@@ -8,7 +8,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon 4_express.js"
+    "dev": "nodemon 8_라우트활용.mjs"
   },
   "devDependencies": {
     "nodemon": "^3.1.14"
@@ -18,3 +18,5 @@
     "express": "^5.2.1"
   }
 }
+
+
