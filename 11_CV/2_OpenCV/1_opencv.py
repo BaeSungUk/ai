@@ -14,7 +14,6 @@ OpenCV는 이미지(영상)을 처리하기 위한 대표적인 오픈소스 컴
 > OpenCV에서 읽은 이미지는 기본적으로 Numpy 배열로 다루기 때문에 Numpy 인덱싱, 슬라이싱, 배열 연산을 그대로 활용할 수 있음
 
 pip install opencv-python
-수정되나?
 """
 
 import cv2
