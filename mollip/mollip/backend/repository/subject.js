@@ -1,0 +1,67 @@
+import Subject from "../models/Subject.js";
+
+// 사용자의 모든 과목 가져오기
+export async function findSubjectsByUser(userId) {
+    return await Subject.find({ user: userId })
+}
+
+// 사용자의 과목 가져오기
+export async function findBySubjectId(subjectId) {
+    return await Subject.findById(subjectId);
+}
+
+// 사용자의 현재 과목 가져오기
+export async function findActiveSubjectsByUser(userId) {
+    return await Subject.find({ 
+        user: userId, 
+        useYn: 'Y' 
+    })
+    // subjectOrder에 없는 과목은 생성 순서대로 뒤에 배치
+    .sort({
+        createdAt: 1
+    })
+}
+
+// 사용자의 아이디, 과목명으로 과목 색 가져오기
+export async function findColorByUserAndTitle(
+  userId,
+  studyTitle,
+) {
+  const subject = await Subject.findOne({
+    user: userId,
+    subjectName: studyTitle,
+  })
+    .select("subjectColor")
+    .lean()
+
+  return subject?.subjectColor || null
+}
+
+// 과목 생성하기
+export async function createSubject(subjectData) {
+    const newSubject = new Subject(subjectData)
+    return await newSubject.save()
+}
+
+// 과목 수정하기
+export async function updateSubject(id, subjectName, subjectColor) {
+    return await Subject.findByIdAndUpdate(
+        id,
+        { subjectName, subjectColor, useYn : 'Y' },
+        { new: true }
+    )
+}
+
+// 과목 삭제하기
+export async function deleteSubject(id) {
+    return await Subject.findByIdAndUpdate(
+        id,
+        { useYn: 'N' },
+        { new: true }
+    )
+}
+
+// 과목 하드 삭제하기
+export async function deleteMany(userId) {
+    return await Subject.deleteMany({ user: userId })
+}

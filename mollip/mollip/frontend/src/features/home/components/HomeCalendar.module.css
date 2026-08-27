@@ -1,0 +1,277 @@
+/* 카드 박스 기본 레이아웃 */
+.homeCalendarCard {
+    width: 100%;
+    height: 100%;
+    min-width: 0;
+    min-height: 0;
+
+    display: flex;
+    flex-direction: column;
+
+    overflow: hidden;
+
+    /* background: #ffffff; */
+    /* border-radius: 16px; */
+    /* border: 1px solid #eaeaea; */
+    /* padding: 20px; */
+}
+
+/* 에러 메시지 */
+.scheduleError {
+    color: var(--color-red);
+    font-size: 12px;
+    margin-bottom: 8px;
+}
+
+.customCalendar {
+    flex: 1 1 auto;
+    height: 100%;
+    min-height: 0;
+    overflow: hidden;
+}
+
+.customCalendar :global(.react-calendar) {
+    width: 100% !important;
+    height: 100%;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    border: none !important;
+    background: transparent !important;
+    font-family: inherit;
+}
+
+.customCalendar :global(.react-calendar__viewContainer) {
+    flex: 1 1 auto;
+    height: 100%;
+    min-height: 0;
+}
+
+.customCalendar :global(.react-calendar__viewContainer) > div {
+    height: 100%;
+    min-height: 0;
+}
+
+.customCalendar :global(.react-calendar__month-view) {
+    height: 100%;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+/* react-calendar가 월 보기 내부에 생성하는 두 겹의 래퍼까지 높이를 전달한다. */
+.customCalendar :global(.react-calendar__month-view) > div {
+    flex: 1 1 auto;
+    height: 100%;
+    min-height: 0;
+    display: flex;
+    align-items: stretch !important;
+}
+
+.customCalendar :global(.react-calendar__month-view) > div > div {
+    flex: 1 1 auto;
+    min-width: 0;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.customCalendar :global(.react-calendar__navigation button:disabled) {
+    background: none;
+    color: var(--color-text);
+    cursor: default;
+    font-weight: 600;
+}
+
+/* 요일 헤더 (월 ~ 일) */
+.customCalendar :global(.react-calendar__month-view__weekdays) {
+    display: flex !important;
+    text-align: center;
+    font-weight: 600;
+    font-size: 12px;
+    color: #888;
+    padding-bottom: 8px;
+}
+
+.customCalendar :global(.react-calendar__month-view__weekdays__weekday) {
+    flex: 1 !important;
+    text-align: center;
+}
+
+.customCalendar :global(.react-calendar__month-view__weekdays__weekday abbr) {
+    text-decoration: none !important;
+}
+
+/* Flexbox를 이용한 완벽한 7등분 날짜 정렬 */
+.customCalendar :global(.react-calendar__month-view__days) {
+    flex: 0 0 auto;
+    height: auto;
+    min-height: 0;
+    display: flex !important;
+    flex-wrap: wrap !important;
+}
+
+.customCalendar :global(.react-calendar__tile) {
+    position: relative !important; 
+    flex: 0 0 14.2857% !important;
+    width: 14.2857% !important;
+    max-width: 14.2857% !important;
+    /* 낮은 노트북에서도 숫자가 사라지지 않는 최소 높이를 보장한다. */
+    height: clamp(36px, 5.5vh, 56px) !important;
+    min-height: 36px;
+    background: var(--color-surface-soft) !important;
+    border-radius: var(--radius-sm) !important;
+    padding: 4px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: flex-start !important;
+    box-sizing: border-box !important;
+    overflow: hidden !important;
+    cursor: pointer;
+    border: 1px solid var(--color-surface);
+    margin-bottom: 4px;
+}
+
+@media (min-width: 1001px) and (max-height: 820px) {
+    .customCalendar :global(.react-calendar__navigation) {
+        height: 32px;
+        margin-bottom: 4px;
+    }
+
+    .customCalendar :global(.react-calendar__month-view__weekdays) {
+        padding-bottom: 4px;
+    }
+
+    .customTileNumber {
+        margin-bottom: 1px;
+        font-size: 12px;
+    }
+}
+
+.customCalendar :global(.react-calendar__tile):hover {
+    background-color: #f1f3f5 !important;
+    border-color: #dee2e6;
+}
+
+.customCalendar :global(.react-calendar__tile--active) {
+    background: #fafafa !important;
+    color: inherit !important;
+}
+
+.customCalendar :global(.react-calendar__tile) > abbr {
+    display: none !important; 
+}
+
+/* 날짜 칸 내부 콘텐츠 및 커스텀 스타일 */
+.calendarCustomTileContent {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    padding: 4px;
+    box-sizing: border-box;
+}
+
+.customTileNumber {
+    font-weight: 600;
+    font-size: 14px;
+    margin-bottom: 3px;
+    padding: 1px 4px;
+    border-radius: 4px;
+    color: #333;
+    align-self: flex-start;
+}
+
+/* 주말(토+일) 빨간 글씨 */
+.customCalendar :global(.react-calendar__month-view__days__day--weekend) .customTileNumber {
+    color: var(--color-red) !important;
+}
+
+/* 토요일만 파란 글씨 - 날짜 기준으로 붙인 saturdayTile 클래스 사용
+   (showNeighboringMonth=false라 nth-child로는 열 위치를 신뢰할 수 없음) */
+.customCalendar :global(.saturdayTile) .customTileNumber {
+    color: var(--color-blue) !important;
+}
+
+/* 이전달/다음달 날짜 연하게 */
+.customCalendar :global(.react-calendar__month-view__days__day--neighboringMonth) .customTileNumber {
+    color: #ccc !important;
+}
+
+/* 선택된 날짜 동그라미 */
+.isSelected {
+    background-color: var(--theme-color, #7c83fd);
+    color: white !important;
+}
+
+/* 일정 바 프리뷰 */
+.calendarSchedulePreview {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    width: 100%;
+}
+
+.calendarScheduleItem {
+    background-color: var(--bgColor);
+    height: 4px; 
+    margin: 0; 
+    border-radius: 2px; 
+    width: 100%;
+    box-sizing: border-box;
+    transition: all 0.2s ease;
+}
+
+.calendarScheduleItem.isStart {
+    margin-left: 2px;
+    width: calc(100% - 2px);
+}
+
+.calendarScheduleItem.isEnd {
+    margin-right: 2px;
+    width: calc(100% - 2px);
+}
+
+.calendarScheduleItem.isStart.isEnd {
+    margin-left: 2px;
+    margin-right: 2px;
+    width: calc(100% - 4px);
+}
+
+/* +1 뱃지 */
+.calendarScheduleMore {
+    font-size: 8px;
+    color: #555;
+    margin-top: 1px;
+    font-weight: 700;
+    text-align: center;
+    background-color: #e9ecef;
+    border-radius: 2px;
+    padding: 0px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* 마우스 호버 툴팁 스타일 */
+.calendarScheduleTooltip {
+    position: fixed;
+    background-color: #333 !important;
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 600;
+    z-index: 99999 !important;
+    pointer-events: none;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.25);
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    min-width: 130px;
+}
+
+.tooltipItem {
+    white-space: nowrap;
+}

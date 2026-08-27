@@ -1,0 +1,467 @@
+.sidebar {
+    flex: 0 0 var(--sidebar-width);
+    width: var(--sidebar-width);
+    min-width: var(--sidebar-width);
+    height: 100vh;
+    padding: 40px 20px 20px;
+    background: var(--color-surface);
+    border-right: 1px solid var(--color-border);
+    box-shadow: var(--shadow-card);
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.sidebarLogo {
+    width: 100%;
+    margin-bottom: 20px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.sidebarLogo img {
+    width: 85%;
+    max-width: 160px;
+    height: auto;
+}
+
+.sidebarUser {
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.sidebarUserInfo{
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.sidebarUSerImgBox{
+    width: 42px;
+    height: 42px;
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+}
+.sidebarGreeting{
+    width: calc(100% - 50px);
+}
+.sidebarNavigation {
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.sidebarNavigationGroup {
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebarNavigationTitle {
+    margin: 0 0 5px;
+    padding: 0;
+
+    color: var(--color-text-muted);
+    font-size: var(--font-xs);
+    font-weight: 500;
+    line-height: 18px;
+    letter-spacing: 0.3px;
+}
+
+.sidebarNavigationLink {
+    width: 100%;
+    min-height: 34px;
+    padding: 10px;
+
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    color: var(--color-text-secondary);
+    font-size: var(--font-md);
+    font-weight: 600;
+
+    background: transparent;
+    border-radius: var(--radius-md);
+
+    transition:
+        color 0.2s ease,
+        background-color 0.2s ease;
+}
+
+.sidebarNavigationLink:hover {
+    color: var(--color-primary-600);
+    background: var(--color-primary-50);
+}
+
+.sidebarNavigationLinkActive {
+    color: var(--color-surface);
+    background: var(--color-primary-400);
+}
+
+.sidebarNavigationLinkActive:hover {
+    color: var(--color-surface);
+    background: var(--color-primary-400);
+}
+
+.sidebarNavigationIcon {
+    flex: 0 0 20px;
+    width: 20px;
+    height: 20px;
+
+    color: var(--color-text-muted);
+}
+
+.sidebarNavigationLinkActive .sidebarNavigationIcon {
+    color: var(--color-surface);
+}
+
+.sidebarNavigationLink span {
+    min-width: 0;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.sidebarGroupNavigationRow {
+    position: relative;
+    width: 100%;
+}
+
+.sidebarGroupNavigationRow .sidebarNavigationLink {
+    padding-right: 44px;
+}
+
+.sidebarGroupInfoButton {
+    position: absolute;
+    top: 50%;
+    right: 8px;
+    width: 28px;
+    height: 28px;
+    padding: 0;
+    display: grid;
+    place-items: center;
+    color: var(--color-text-muted);
+    font-size: 16px;
+    background: transparent;
+    border: 0;
+    border-radius: 50%;
+    transform: translateY(-50%);
+    transition:
+        color 0.2s ease,
+        background-color 0.2s ease;
+}
+
+.sidebarGroupInfoButton:hover {
+    color: var(--color-primary-700);
+    background: var(--color-primary-100);
+}
+
+.sidebarGroupInfoButton:focus-visible {
+    outline: 2px solid var(--color-primary-300);
+    outline-offset: 2px;
+}
+
+.sidebarNavigationLinkActive + .sidebarGroupInfoButton {
+    color: var(--color-surface);
+}
+
+.sidebarNavigationLinkActive + .sidebarGroupInfoButton:hover {
+    color: var(--color-primary-700);
+    background: var(--color-surface);
+}
+
+.sidebarTimer {
+    width: 100%;
+    margin-top: 25px;
+    padding: 15px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+
+    text-align: center;
+
+    background: var(--color-primary-50);
+    border: 1px solid var(--color-primary-100);
+    border-radius: var(--radius-md);
+}
+
+.sidebarTimerSubject {
+    width: 100%;
+
+    color: var(--color-primary-700);
+    font-size: var(--font-sm);
+    font-weight: 600;
+    line-height: 20px;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.sidebarTimerSubject span {
+    margin-right: 5px;
+}
+
+.sidebarTimerTime {
+    color: var(--color-primary-600);
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 25px;
+    letter-spacing: 1px;
+}
+
+.sidebarStreak, .sidebarAI, .sidebarLogout {
+    width: 100%;
+}
+
+.sidebar::-webkit-scrollbar {
+    width: 5px;
+}
+
+.sidebar::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+    background: var(--color-border-strong);
+    border-radius: var(--radius-sm);
+}
+/* =========================
+    사이드바 하단 영역
+========================= */
+
+.sidebarBottom {
+    width: 100%;
+    margin-top: 40px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+
+/* =========================
+    연속 학습일 카드
+========================= */
+
+.sidebarStreak {
+    width: 100%;
+}
+
+.sidebarAI {
+    width: 100%;
+    padding: 20px 15px;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+
+    border: none;
+    border-radius: var(--radius-sm);
+
+    color: var(--color-primary-600);
+    font-weight: 600;
+    cursor: pointer;
+
+    margin-bottom: 30px;
+
+    background: var(--color-primary-50);
+    border: 1px solid var(--color-primary-100);
+    border-radius: var(--radius-lg);
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.sidebarAI .sidebarNavigationIcon {
+    color: var(--color-primary-600);
+}
+
+.sidebarAI:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 15px rgba(155, 123, 211, 0.25);
+}
+
+.sidebarAI:active {
+    transform: translateY(0);
+}
+
+/* 반드시 .sidebarAI {} 바깥 */
+@keyframes sidebarAIGradient {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+
+.sidebarAI .sidebarNavigationIcon{
+    color: var(--color-primary-600);
+}
+.sidebarAI:hover,
+.sidebarAI:hover .sidebarNavigationIcon{
+    color: #fff;
+    background: var(--color-primary-400);
+}
+
+.sidebarStudyStreak {
+    width: 100%;
+    padding: 25px 20px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    background: var(--color-primary-50);
+    border: 1px solid var(--color-primary-100);
+    border-radius: var(--radius-lg);
+}
+
+.sidebarStudyTitle {
+    color: var(--color-primary-600);
+    font-size: var(--font-sm);
+    font-weight: 600;
+    line-height: 20px;
+}
+
+.sidebarStudyCount {
+    display: flex;
+    align-items: flex-end;
+    gap: 5px;
+}
+
+.sidebarStudyCount strong {
+    color: var(--color-primary-600);
+    font-size: 45px;
+    font-weight: 700;
+    line-height: 50px;
+}
+
+.sidebarStudyCount span {
+    color: var(--color-primary-700);
+    font-size: var(--font-lg);
+    font-weight: 500;
+    line-height: 25px;
+}
+
+.sidebarStudyCount span[aria-hidden="true"] {
+    margin-left: 10px;
+    font-size: 30px;
+    line-height: 35px;
+}
+
+.sidebarStudyMax {
+    color: var(--color-text-secondary);
+    font-size: var(--font-xs);
+    font-weight: 500;
+    line-height: 20px;
+}
+
+
+/* =========================
+로그아웃
+========================= */
+
+.sidebarLogout {
+    width: 100%;
+    /* opacity: .5; */
+}
+
+.sidebarLogoutButton {
+    width: 100%;
+    min-height: 40px;
+    padding: 10px 15px;
+
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 15px;
+
+    color: var(--color-text);
+    font-size: var(--font-sm);
+    font-weight: 600;
+    line-height: 20px;
+    text-align: left;
+
+    background: transparent;
+    border-radius: var(--radius-md);
+
+    transition:
+        color 0.2s ease,
+        background-color 0.2s ease;
+}
+
+.sidebarLogoutButton:hover {
+    color: var(--color-primary-600);
+    background: var(--color-primary-50);
+}
+
+.sidebarLogoutButton:focus-visible {
+    outline: 2px solid var(--color-primary-300);
+    outline-offset: 2px;
+}
+
+/* 관리자 관리회원현황 모달 버튼 */
+.adminMemberStatusSidebarButton {
+    border: 0;
+    text-align: left;
+    cursor: pointer;
+    font-family: inherit;
+}
+
+/* 버튼 기본 스타일 제거 후 기존 사이드바 링크와 동일하게 표시 */
+.adminMemberStatusSidebarButton:focus-visible {
+    outline: 2px solid var(--color-primary-300);
+    outline-offset: 2px;
+}
+
+@media (max-width: 1000px) {
+    .sidebar {
+        width: var(--sidebar-width);
+        min-width: var(--sidebar-width);
+    }
+
+    .sidebarNavigationLink {
+        padding-left: 18px;
+        padding-right: 18px;
+    }
+}
+
+.sidebarTimerFloatingButton {
+    min-height: 30px;
+    padding: 0 12px;
+    color: var(--color-primary-700);
+    font-size: 11px;
+    font-weight: 700;
+    background: var(--color-surface);
+    border: 1px solid var(--color-primary-200);
+    border-radius: 999px;
+}
+
+.sidebarTimerFloatingButton:hover {
+    color: var(--color-surface);
+    background: var(--color-primary-600);
+    border-color: var(--color-primary-600);
+}

@@ -1,0 +1,240 @@
+.recordPage {
+    width: 100%;
+    height: 100%;
+    min-width: 0;
+    min-height: 0;
+
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-5);
+
+    overflow: hidden;
+}
+
+/* ========================= 페이지 상단========================= */
+.pageHeader {
+    flex: 0 0 auto;
+    width: 100%;
+    min-width: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-5);
+}
+
+.headerLeft {
+    min-width: 0;
+
+    display: flex;
+    align-items: center;
+    gap: var(--space-5);
+}
+
+
+/* ========================= 전체 본문 ========================= */
+.recordBody {
+    flex: 1 1 auto;
+    width: 100%;
+    min-width: 0;
+    min-height: 0;
+
+    display: flex;
+    align-items: stretch;
+    gap: var(--space-5);
+
+    overflow: hidden;
+}
+
+
+/* ========================= 왼쪽 메인 영역 ========================= */
+.mainArea {
+    flex: 1 1 76%;
+    min-width: 0;
+    min-height: 0;
+
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-5);
+
+    overflow: hidden;
+}
+
+/* ========================= 요약 카드 3개 ========================= */
+.summaryRow {
+    flex: 0 0 30%;
+    width: 100%;
+    min-width: 0;
+    min-height: 0;
+
+    display: flex;
+    align-items: stretch;
+    gap: var(--space-5);
+
+    overflow: hidden;
+}
+
+.summaryRow > * {
+    flex: 1 1 0;
+    min-width: 0;
+    min-height: 0;
+}
+
+
+/* ========================= 하단 그래프 영역 ========================= */
+.chartRow {
+    flex: 1 1 auto;
+    width: 100%;
+    min-width: 0;
+    min-height: 0;
+
+    display: flex;
+    align-items: stretch;
+    gap: var(--space-5);
+
+    overflow: hidden;
+}
+
+.barArea {
+    flex: 1 1 50%;
+    min-width: 0;
+    min-height: 0;
+
+    display: flex;
+    flex-direction: column;
+
+    overflow: hidden;
+}
+
+.heatmapArea {
+    flex: 1 1 50%;
+    min-width: 0;
+    min-height: 0;
+
+    display: flex;
+    flex-direction: column;
+
+    overflow: hidden;
+}
+
+.barArea > *,
+.heatmapArea > * {
+    flex: 1 1 auto;
+    min-height: 0;
+}
+
+
+/* ========================= 오른쪽 Todo 영역 ========================= */
+
+.todoArea {
+    flex: 0 1 24%;
+    min-width: 300px;
+    min-height: 0;
+
+    display: flex;
+    flex-direction: column;
+
+    overflow: hidden;
+}
+
+.todoArea > * {
+    flex: 1 1 auto;
+    min-height: 0;
+}
+
+
+@media (min-width: 1821px) {
+    .summaryRow {
+        gap: 18px;
+    }
+
+    .summaryRow > * {
+        min-height: 150px;
+    }
+
+    .chartRow {
+        gap: 20px;
+    }
+
+    .chartRow > * {
+        min-height: 320px;
+    }
+}
+
+
+@media (max-width: 1000px) {
+    .pageHeader {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 16px;
+    }
+
+    .pageHeader > div:first-child {
+        width: 100%;
+    }
+
+    .pageHeader h1 {
+        width: auto;
+        white-space: nowrap;
+    }
+
+    .controls {
+        width: 100%;
+
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+    }
+
+    .recordPage {
+        height: auto;
+        overflow: visible;
+    }
+
+    .recordBody {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: var(--space-5);
+
+        overflow: visible;
+    }
+
+    .mainArea {
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-5);
+
+        overflow: visible;
+    }
+
+    .summaryRow {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 16px;
+
+        overflow: visible;
+        flex: auto;
+    }
+
+    .summaryRow > * {
+        min-height: 180px;
+        height: auto;
+    }
+
+    .chartRow {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: var(--space-5);
+    }
+    
+    .chartRow > * {
+        min-height: 300px;
+        height: auto;
+    }
+
+    .todoArea {
+        width: 100%;
+        min-height: 400px;
+    }
+}

@@ -1,0 +1,24 @@
+:root {
+  font-family:
+    Pretendard,
+    "Noto Sans KR",
+    Arial,
+    sans-serif;
+  --color-ink: #2f2924;
+  --color-muted: #746a61;
+  --color-brand: #8b5e3c;
+  --color-brand-dark: #68432b;
+  --color-brand-soft: #f2e8de;
+  --color-accent: #b86f52;
+  --color-canvas: #f7f3ed;
+  --color-surface: #fffdf9;
+  --color-line: #e6ddd3;
+  --shadow-sm: 0 6px 18px rgba(75, 52, 35, 0.07);
+  --shadow-md: 0 16px 42px rgba(75, 52, 35, 0.12);
+  --radius-sm: 10px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+
+  color: var(--color-ink);
+  background: var(--color-canvas);
+}

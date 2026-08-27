@@ -1,0 +1,11 @@
+import { Router } from "express";
+import * as c from "../controllers/reservationController.js";
+import { asyncHandler as a } from "../utils/asyncHandler.js";
+import { authenticate } from "../middleware/authMiddleware.js";
+const r = Router();
+r.use(authenticate);
+r.post("/", a(c.create));
+r.get("/", a(c.list));
+r.get("/:reservationId", a(c.get));
+r.patch("/:reservationId/cancel", a(c.cancel));
+export default r;

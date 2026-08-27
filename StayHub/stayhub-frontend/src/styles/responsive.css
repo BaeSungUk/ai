@@ -1,0 +1,247 @@
+@media (
+  max-width: 900px
+) {
+  .hotel-grid {
+    grid-template-columns:
+      repeat(2, 1fr);
+  }
+
+  .search-box {
+    grid-template-columns:
+      1fr 1fr;
+  }
+
+  .detail-header {
+    grid-template-columns:
+      1fr;
+  }
+
+  .reservation-search {
+    grid-template-columns:
+      1fr;
+  }
+}
+
+@media (
+  max-width: 600px
+) {
+  .header-inner {
+    padding: 0 15px;
+  }
+
+  .nav {
+    gap: 10px;
+
+    font-size: 14px;
+  }
+
+  .nickname {
+    display: none;
+  }
+
+  .hero {
+    padding: 35px 25px;
+  }
+
+  .hero h1 {
+    font-size: 30px;
+  }
+
+  .hotel-grid,
+  .search-box {
+    grid-template-columns:
+      1fr;
+  }
+
+  .room-card,
+  .reservation-card {
+    flex-direction: column;
+
+    align-items:
+      flex-start;
+
+    gap: 20px;
+  }
+
+  .room-card-action,
+  .reservation-card-info {
+    align-items:
+      flex-start;
+  }
+
+  .reservation-filter {
+    flex-direction:
+      column;
+
+    align-items: stretch;
+  }
+}
+
+
+@media (
+  max-width: 700px
+) {
+
+  .my-hotel-heading {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+
+  .my-hotel-card {
+    flex-direction: column;
+  }
+
+
+  .my-hotel-image {
+    width: 100%;
+    height: 200px;
+  }
+
+
+  .my-hotel-meta {
+    align-items: flex-start;
+    flex-direction: column;
+
+    gap: 8px;
+  }
+
+
+  .my-hotel-meta strong {
+    margin-left: 0;
+  }
+}
+
+@media (max-width: 900px) {
+  .header {
+    height: auto;
+  }
+
+  .header-inner {
+    min-height: 70px;
+    gap: 12px;
+  }
+
+  .nav {
+    gap: 2px;
+  }
+
+  .nav a,
+  .text-button,
+  .nickname {
+    padding: 7px 8px;
+    font-size: 13px;
+  }
+
+  .hero {
+    padding-right: 38px;
+    padding-left: 38px;
+  }
+
+  .search-box {
+    margin-right: 18px;
+    margin-left: 18px;
+  }
+}
+
+@media (max-width: 700px) {
+  .header-inner {
+    align-items: flex-start;
+    flex-direction: column;
+    padding: 16px 20px;
+  }
+
+  .nav {
+    width: 100%;
+    overflow-x: auto;
+    padding-bottom: 2px;
+    white-space: nowrap;
+    scrollbar-width: none;
+  }
+
+  .nav::-webkit-scrollbar {
+    display: none;
+  }
+
+  .page {
+    padding: 28px 18px 64px;
+  }
+
+  .hero {
+    min-height: 220px;
+    margin-bottom: -24px;
+    border-radius: 20px;
+    padding: 42px 28px 62px;
+  }
+
+  .hero h1 {
+    font-size: 34px;
+  }
+
+  .search-box {
+    margin-right: 12px;
+    margin-bottom: 36px;
+    margin-left: 12px;
+    padding: 14px;
+  }
+
+  .content-section,
+  .detail-info,
+  .auth-card,
+  .hotel-form,
+  .reservation-detail-card,
+  .complete-card {
+    padding: 22px;
+  }
+
+  .hotel-grid {
+    gap: 18px;
+  }
+
+  .room-card {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .room-image {
+    width: 100%;
+    min-height: 210px;
+    aspect-ratio: 16 / 10;
+  }
+
+  .room-card-action {
+    align-items: stretch;
+    padding: 0 22px 22px;
+  }
+
+  .room-card-action .availability {
+    text-align: left;
+  }
+
+  .my-hotel-actions,
+  .reservation-actions,
+  .detail-link-actions {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .my-hotel-actions button,
+  .reservation-actions button,
+  .detail-link-actions a {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}

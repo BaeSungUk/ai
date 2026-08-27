@@ -1,0 +1,390 @@
+import { API_URL } from "../config/apiUrl.js"
+import { useOutletContext } from "react-router-dom"
+import { useEffect, useState } from "react"
+
+import Timer from "../features/home/components/Timer"
+import TodoList from "../features/home/components/TodoList"
+import HomeCalendar from "../features/home/components/HomeCalendar"
+import SubjectList from "../features/home/components/SubjectList"
+import AppAlert from "../components/common/AppAlert.jsx"
+import { getMyInfo } from "../features/auth/api/auth"
+
+import styles from "./HomePage.module.css"
+
+import { useTimer } from "../context/TimerContext"
+
+// 마이페이지에서 저장한 과목 순서를 홈 화면에도 적용
+function applySavedSubjectOrder(subjectList) {
+  const userId =
+    localStorage.getItem("userId") || "unknown"
+
+  const storageKey =
+    `mollip-subject-order-${userId}`
+
+  const savedOrderText =
+    localStorage.getItem(storageKey)
+
+  if (!savedOrderText) {
+    return subjectList
+  }
+
+  try {
+    const savedSubjectIds =
+      JSON.parse(savedOrderText)
+
+    if (!Array.isArray(savedSubjectIds)) {
+      return subjectList
+    }
+
+    const subjectMap = new Map(
+      subjectList.map((subject) => [
+        subject._id,
+        subject,
+      ])
+    )
+
+    // 저장된 순서에 포함된 과목
+    const orderedSubjects = savedSubjectIds
+      .map((subjectId) =>
+        subjectMap.get(subjectId)
+      )
+      .filter(Boolean)
+
+    // 저장 이후 새로 추가된 과목
+    const unorderedSubjects =
+      subjectList.filter(
+        (subject) =>
+          !savedSubjectIds.includes(
+            subject._id
+          )
+      )
+
+    return [
+      ...orderedSubjects,
+      ...unorderedSubjects,
+    ]
+  } catch (error) {
+    console.error(
+      "홈 과목 순서 적용 실패:",
+      error
+    )
+
+    return subjectList
+  }
+}
+
+// todoRefreshKey = Ai todo
+export default function HomePage() {
+  const { todoRefreshKey, handleTodoListChanged } = useOutletContext() // AI Todo 추가/제거 후 홈 Todo 목록 재조회 값, 홈 Todo 추가/삭제 후 AI 추천 목록 동기화 함수
+  
+  const {
+    selectedSubject,
+    setSelectedSubject,
+    time,
+    isRunning,
+    timerStatus,
+    isSaving,
+    startTimer,
+    stopTimer
+  } = useTimer()
+
+  const [subjects, setSubjects] =
+    useState([])
+
+  const [dailyRecords, setDailyRecords] =
+    useState([])
+
+  const [studyRefreshKey, setStudyRefreshKey] =
+    useState(0)
+
+  const [userInfo, setUserInfo] =
+    useState(null)
+
+  const [alertMessage, setAlertMessage] =
+    useState("")
+
+  const userToken =
+    localStorage.getItem("token")
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const userData =
+          await getMyInfo()
+
+        setUserInfo(userData.user)
+
+        const kstOffset =
+          new Date().getTimezoneOffset() *
+          60000
+
+        const todayKST = new Date(
+          Date.now() - kstOffset
+        )
+          .toISOString()
+          .split("T")[0]
+
+        // 과목 조회
+        const subjectRes = await fetch(
+          `${API_URL}/auth/subject`,
+          {
+            headers: {
+              Authorization:
+                `Bearer ${userToken}`,
+            },
+          }
+        )
+
+        if (subjectRes.ok) {
+          const subjectData =
+            await subjectRes.json()
+
+          let finalSubjects = []
+
+          if (
+            Array.isArray(
+              subjectData
+            )
+          ) {
+            finalSubjects =
+              subjectData
+          } else if (
+            subjectData &&
+            typeof subjectData ===
+            "object"
+          ) {
+            const arrayKey =
+              Object.keys(
+                subjectData
+              ).find((key) =>
+                Array.isArray(
+                  subjectData[key]
+                )
+              )
+
+            if (arrayKey) {
+              finalSubjects =
+                subjectData[
+                arrayKey
+                ]
+            } else if (
+              subjectData.subjectName
+            ) {
+              finalSubjects = [
+                subjectData,
+              ]
+            }
+          }
+
+          const orderedSubjects =
+            applySavedSubjectOrder(
+              finalSubjects
+            )
+
+          setSubjects(
+            orderedSubjects
+          )
+        }
+
+        // 오늘 공부 기록 조회
+        const recordRes = await fetch(
+          `${API_URL}/study/records?type=daily&date=${todayKST}`,
+          {
+            headers: {
+              Authorization:
+                `Bearer ${userToken}`,
+            },
+          }
+        )
+
+        if (recordRes.ok) {
+          const recordData =
+            await recordRes.json()
+
+          let finalRecords = []
+
+          if (
+            Array.isArray(recordData)
+          ) {
+            finalRecords = recordData
+          } else if (
+            recordData &&
+            typeof recordData ===
+            "object"
+          ) {
+            const arrayKey =
+              Object.keys(
+                recordData
+              ).find((key) =>
+                Array.isArray(
+                  recordData[key]
+                )
+              )
+
+            if (arrayKey) {
+              finalRecords =
+                recordData[
+                arrayKey
+                ]
+            }
+          }
+
+          setDailyRecords(
+            finalRecords
+          )
+        }
+      } catch (error) {
+        console.error(
+          "데이터 불러오기 실패:",
+          error
+        )
+      }
+    }
+
+    fetchData()
+  }, [userToken, studyRefreshKey])
+
+  useEffect(() => {
+    const handleStudyRecordSaved = () => {
+      setStudyRefreshKey((previousKey) => previousKey + 1)
+    }
+
+    window.addEventListener(
+      "mollip-study-record-saved",
+      handleStudyRecordSaved
+    )
+
+    return () => {
+      window.removeEventListener(
+        "mollip-study-record-saved",
+        handleStudyRecordSaved
+      )
+    }
+  }, [])
+
+  // 타이머 실행 중에는 과목 변경 차단
+  const handleSubjectChange = (subject) => {
+    if (isRunning || isSaving) {
+      setAlertMessage(
+        isSaving
+          ? "공부 기록 저장이 끝난 후 과목을 변경해주세요."
+          : "과목을 변경하려면 STOP 버튼을 눌러주세요."
+      )
+      return
+    }
+
+    setSelectedSubject(subject)
+  }
+
+  return (
+    <>
+      <main className="app-page app-page--fixed">
+        <div
+          className={`app-page__inner ${styles.homeInner}`}
+        >
+          <header className="app-page-header">
+            <div>
+              <h1 className="app-page-title">
+                홈
+              </h1>
+
+              <p className="app-page-description">
+                오늘의 학습을
+                계획하고 기록해
+                보세요.
+              </p>
+            </div>
+          </header>
+
+          <div
+            className={
+              styles.homeContent
+            }
+          >
+            {/* 상단: 타이머 + 과목 */}
+            <div
+              className={`${styles.homeRow} ${styles.topRow}`}
+            >
+              <section
+                className={`commonSection ${styles.timerSection}`}
+              >
+                <Timer
+                  selectedSubject={
+                    selectedSubject
+                  }
+                  userInfo={
+                    userInfo
+                  }
+                  dailyRecords={
+                    dailyRecords
+                  }
+                  time={time}
+                  isRunning={
+                    isRunning
+                  }
+                  timerStatus={timerStatus}
+                  isSaving={isSaving}
+                  startTimer={startTimer}
+                  stopTimer={stopTimer}
+                />
+              </section>
+
+              <section
+                className={`commonSection ${styles.subjectSection}`}
+              >
+                <div
+                  className={
+                    styles.subjectContent
+                  }
+                >
+                  <SubjectList
+                    subjects={
+                      subjects
+                    }
+                    dailyRecords={
+                      dailyRecords
+                    }
+                    selectedSubject={
+                      selectedSubject
+                    }
+                    onSelectSubject={
+                      handleSubjectChange
+                    }
+                  />
+                </div>
+              </section>
+            </div>
+
+            {/* 하단: Todo + 캘린더 */}
+            <div className={`${styles.homeRow} ${styles.bottomRow}`} >
+              <section className={`commonSection ${styles.todoSection}`} >
+                {/* AI todo도 받도록 수정 */}
+                <TodoList
+                  refreshKey={todoRefreshKey}
+
+                  // 홈 Todo 변경 시 AI 추천 목록 동기화
+                  onTodoListChanged={handleTodoListChanged}
+                />
+              </section>
+              
+              <section className={styles.calendarSection}>
+                <HomeCalendar />
+              </section>
+            </div>
+          </div>
+        </div>
+      </main>
+
+      {/* 홈 공통 알림 모달 */}
+
+      <AppAlert
+        open={Boolean(alertMessage)}
+        type="warning"
+        title="알림"
+        message={alertMessage}
+        onConfirm={() => setAlertMessage("")}
+        onClose={() => setAlertMessage("")}
+      />
+    </>
+  )
+}

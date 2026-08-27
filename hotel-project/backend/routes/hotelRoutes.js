@@ -1,0 +1,15 @@
+import { Router } from "express";
+import * as h from "../controllers/hotelController.js";
+import { list as rooms } from "../controllers/roomController.js";
+import { list as reviews } from "../controllers/reviewController.js";
+import { asyncHandler as a } from "../utils/asyncHandler.js";
+import { authenticate, requireAdmin } from "../middleware/authMiddleware.js";
+const r = Router();
+r.get("/", a(h.list));
+r.get("/:hotelId/rooms", a(rooms));
+r.get("/:hotelId/reviews", a(reviews));
+r.get("/:hotelId", a(h.get));
+r.post("/", authenticate, requireAdmin, a(h.create));
+r.put("/:hotelId", authenticate, requireAdmin, a(h.update));
+r.delete("/:hotelId", authenticate, requireAdmin, a(h.remove));
+export default r;

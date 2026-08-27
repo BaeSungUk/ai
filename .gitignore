@@ -1,0 +1,74 @@
+# Git backups
+.git_backup/
+
+# Secrets and local environment variables
+.env
+.env.*
+!.env.example
+
+# Learning files that currently contain credentials
+/1_python/18_GPTAPI.ipynb
+/7_nodejs/9_메모.js
+
+# Python virtual environments and caches
+venv/
+.venv/
+env/
+ENV/
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Python packaging/build output
+*.egg-info/
+.eggs/
+pip-wheel-metadata/
+dist/
+build/
+
+# Node dependencies, caches, and build output
+node_modules/
+.npm/
+.yarn/cache/
+.pnpm-store/
+.next/
+.nuxt/
+.parcel-cache/
+coverage/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Downloaded datasets (keep source code and notebooks)
+/2_DataAnalysis/data/
+/10_MLDL/data/
+
+# Trained models and generated ML output
+*.pth
+*.pt
+*.ckpt
+*.onnx
+*.h5
+*.keras
+outputs/
+runs/
+wandb/
+
+# IDE and OS metadata
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Logs and temporary files
+*.log
+*.tmp
+*.temp
+*.swp
+*.swo

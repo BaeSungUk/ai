@@ -1,0 +1,47 @@
+import dotenv from "dotenv"
+
+dotenv.config()
+
+function required(key, defaultValue = undefined) {
+    const value = process.env[key] || defaultValue
+    if (value == null) {
+        throw new Error(`키 ${key}는 undefined`)
+    }
+    return value
+}
+
+export const config = {
+    jwt: {
+        secretKey: required("JWT_SECRET"),
+        expiresInSec: parseInt(required("JWT_EXPIRES_SEC"))
+    },
+    bcrypt: {
+        saltRounds: parseInt(required("BCRYPT_SALT_ROUNDS", 10))
+    },
+    host: {
+        port: parseInt(required("HOST_PORT", 3000))
+    },
+    db: {
+        host: required("DB_HOST")
+    },
+    redis: {
+        host: required("REDIS_HOST", "127.0.0.1"),
+        port: parseInt(required("REDIS_PORT", 6379))
+    },
+    ai: {
+        serverUrl: required("AI_SERVER_URL", "http://127.0.0.1:8000")
+    },
+    group: {
+        dormantId: required(
+            "DORMANT_GROUP_ID",
+        ),
+    },
+    google: {
+        clientId: required(
+            "GOOGLE_CLIENT_ID",
+        ),
+    },
+    cors: {
+        allowedOrigins: required("CORS_ORIGINS").split(",")
+    }
+}

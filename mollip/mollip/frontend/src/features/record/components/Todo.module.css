@@ -1,0 +1,366 @@
+.todoRecord {
+    width: 100%;
+    height: 100%;
+    min-width: 0;
+    min-height: 0;
+
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-5);
+
+    overflow: hidden;    
+    
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+}
+
+
+/* =========================
+   목표 달성률
+========================= */
+
+.achievementCard {
+    position: relative;
+    flex: 0 0 290px;
+    min-height: 0;
+    padding: var(--space-5);
+
+    display: flex;
+    flex-direction: column;
+
+    /* background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg); */
+
+    /* overflow: hidden; */
+}
+.achievementCard::before {
+    position: absolute;
+    content: '';
+    display: block;
+    width: 70%;
+    height: 5px;
+    border-bottom: 1px dashed var(--color-text-muted);
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: -10px;
+    opacity: .5;
+    z-index: 5;
+}
+
+.achievementHeader {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    margin-bottom: var(--space-4);
+}
+
+.achievementHeaderIcon {
+    flex: 0 0 36px;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-primary-600);
+    background: var(--color-primary-100);
+    border-radius: 50%;
+}
+
+.achievementTitle {
+    flex: 0 0 auto;
+    margin-bottom: var(--space-3);
+
+    color: var(--color-text);
+    font-size: var(--font-lg);
+    font-weight: 700;
+}
+
+.chartArea {
+    position: relative;
+
+    flex: 1 1 auto;
+    width: 100%;
+    min-height: 0;
+}
+
+.chartCenter {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+
+    text-align: center;
+
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+}
+
+.achievementLabel {
+    margin-bottom: var(--space-1);
+
+    color: var(--color-text-muted);
+    font-size: var(--font-xs);
+}
+
+.achievementRate {
+    color: var(--color-primary-600);
+    font-size: var(--font-2xl);
+    font-weight: 800;
+}
+
+.achievementSummary {
+    flex: 0 0 auto;
+    margin-top: var(--space-2);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-5);
+}
+
+.achievementSummaryItem {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+
+    color: var(--color-text-secondary);
+    font-size: var(--font-sm);
+}
+
+.summaryDot {
+    width: 8px;
+    height: 8px;
+
+    border-radius: 50%;
+}
+
+.completedDot {
+    background: var(--color-primary-600);
+}
+
+.incompleteDot {
+    background: var(--color-primary-100);
+}
+
+
+/* =========================
+   Past List
+========================= */
+
+.pastListCard {
+    flex: 1 1 auto;
+    min-width: 0;
+    min-height: 0;
+    padding: var(--space-5);
+
+    display: flex;
+    flex-direction: column;
+
+    /* background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg); */
+
+    overflow: hidden;
+}
+
+.pastListHeader {
+    flex: 0 0 auto;
+    margin-bottom: var(--space-4);
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-3);
+}
+
+.pastListTitle {
+    flex-shrink: 0;
+
+    color: var(--color-text);
+    font-size: var(--font-lg);
+    font-weight: 700;
+}
+
+
+/* =========================
+   필터
+========================= */
+
+.todoFilter {
+    padding: var(--space-1);
+
+    display: flex;
+    align-items: center;
+    gap: var(--space-1);
+
+    background: var(--color-primary-50);
+    border: 1px solid var(--color-primary-100);
+    border-radius: var(--radius-md);
+}
+
+.todoFilterButton {
+    min-height: 30px;
+    padding: 0 var(--space-2);
+
+    display: flex;
+    align-items: center;
+    gap: var(--space-1);
+
+    color: var(--color-text-muted);
+    font-size: var(--font-xs);
+    font-weight: 600;
+
+    background: transparent;
+    border-radius: var(--radius-sm);
+
+    transition:
+        color 0.15s ease,
+        background-color 0.15s ease;
+}
+
+.todoFilterButton:hover {
+    color: var(--color-primary-700);
+    background: var(--color-primary-100);
+}
+
+.todoFilterButton span {
+    font-size: var(--font-xs);
+}
+
+.active {
+    color: var(--color-surface);
+    background: var(--color-primary-600);
+}
+
+.active:hover {
+    color: var(--color-surface);
+    background: var(--color-primary-700);
+}
+
+
+/* =========================
+   목록 상태
+========================= */
+
+.todoRecordMessage {
+    flex: 1 1 auto;
+    min-height: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: var(--color-text-muted);
+    font-size: var(--font-sm);
+    text-align: center;
+}
+
+.errorMessage {
+    color: var(--color-danger);
+}
+
+
+/* =========================
+   Todo 목록
+========================= */
+
+.pastTodoList {
+    flex: 1 1 auto;
+    width: 100%;
+    min-height: 0;
+    padding-right: var(--space-2);
+
+    display: flex;
+    flex-direction: column;
+
+    overflow-x: hidden;
+    overflow-y: auto;
+
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-primary-300) transparent;
+}
+
+.pastTodoList::-webkit-scrollbar {
+    width: 5px;
+}
+
+.pastTodoList::-webkit-scrollbar-thumb {
+    background: var(--color-primary-300);
+    border-radius: var(--radius-sm);
+}
+
+.pastTodoList::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.pastTodoItem {
+    flex: 0 0 auto;
+    min-width: 0;
+    min-height: 45px;
+    padding: var(--space-2) 0;
+
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+
+    border-bottom: 1px solid var(--color-border);
+}
+
+.pastTodoItem:last-child {
+    border-bottom: 0;
+}
+
+.pastTodoState {
+    flex: 0 0 20px;
+    width: 20px;
+    height: 20px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: var(--font-xs);
+    font-weight: 700;
+
+    border-radius: var(--radius-sm);
+}
+
+.completedItem .pastTodoState {
+    color: var(--color-success);
+    background: rgba(69, 184, 135, 0.12);
+}
+
+.incompleteItem .pastTodoState {
+    color: var(--color-danger);
+    background: rgba(239, 108, 115, 0.12);
+}
+
+.pastTodoText {
+    flex: 1 1 auto;
+    min-width: 0;
+
+    color: var(--color-text-secondary);
+    font-size: var(--font-sm);
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.completedItem .pastTodoText {
+    color: var(--color-text-muted);
+    text-decoration: line-through;
+}
+
+.pastTodoDate {
+    flex: 0 0 auto;
+
+    color: var(--color-text-muted);
+    font-size: var(--font-xs);
+}

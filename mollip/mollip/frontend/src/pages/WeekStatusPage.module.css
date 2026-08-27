@@ -1,0 +1,146 @@
+.page {
+    width: 100%;
+    height: 100%;
+    min-width: 0;
+    min-height: 0;
+
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+
+    overflow: hidden;
+}
+
+
+/* ========================= 개인·그룹 통계 ========================= */
+
+.statisticsSection {
+    flex: 1 1 0;
+    width: 100%;
+    min-width: 0;
+    min-height: 0;
+
+    display: flex;
+    flex-direction: column;
+
+    overflow: hidden;
+}
+
+.sectionTitle {
+    flex: 0 0 auto;
+    margin-bottom: var(--space-2);
+    padding-left: var(--space-2);
+
+    color: var(--color-text);
+    font-size: var(--font-lg);
+    font-weight: 700;
+    line-height: 1.4;
+}
+
+.statisticsPanel {
+    flex: 1 1 auto;
+    width: 100%;
+    min-width: 0;
+    min-height: 0;
+    padding: var(--space-3);
+
+    display: flex;
+    align-items: stretch;
+    gap: var(--space-4);
+
+    background: var(--color-primary-50);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+
+    overflow: hidden;
+}
+
+.statisticsPanel > * {
+    flex: 1 1 33.333%;
+    min-width: 0;
+    min-height: 0;
+}
+
+
+/* ========================= 랭킹 ========================= */
+
+.rankingSection {
+    flex: 0 0 auto;
+    width: 100%;
+    min-width: 0;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.rankingPanel {
+    width: 100%;
+    min-width: 0;
+    padding: var(--space-3);
+
+    background: var(--color-primary-50);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+
+    overflow: hidden;
+}
+
+
+@media (max-width: 1000px) {
+    .page {
+        height: auto;
+        min-height: 100%;
+
+        gap: var(--space-5);
+
+        overflow: visible;
+    }
+
+    .statisticsSection {
+        flex: none;
+
+        width: 100%;
+        min-height: 0;
+
+        overflow: visible;
+    }
+
+    .sectionTitle {
+        margin-bottom: var(--space-3);
+        padding-left: 0;
+    }
+
+    .statisticsPanel {
+        flex: none;
+
+        width: 100%;
+        min-height: 0;
+        padding: var(--space-4);
+
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: var(--space-4);
+
+        overflow: visible;
+    }
+
+    .statisticsPanel > * {
+        width: 100%;
+        min-width: 0;
+        min-height: 320px;
+    }
+
+    .rankingSection {
+        flex: none;
+
+        width: 100%;
+        min-height: 0;
+    }
+
+    .rankingPanel {
+        min-height: 420px;
+        padding: var(--space-4);
+
+        overflow: visible;
+    }
+}

@@ -1,0 +1,154 @@
+import { useState, memo } from "react"
+import { NavLink } from "react-router-dom"
+
+import SidebarUserInfo from "./SidebarUserInfo"
+import SidebarStudyStreak from "./SidebarStudyStreak"
+import SidebarLogout from "./SidebarLogout"
+import AiReportModal from "./AiReportModal.jsx"
+import SidebarTimer from "./SidebarTimer.jsx"
+import GroupListModal from "./GroupListModal.jsx"
+
+import AppAlert from "./common/AppAlert.jsx"
+import "./Sidebar.css"
+import { FiBarChart2, FiBookOpen, FiHome, FiInfo, FiSettings, FiUsers } from "react-icons/fi"
+import { RiSparklingFill } from "react-icons/ri"
+
+const DEFAULT_GROUP_ID = "6a671438ab632542fc161df7"
+
+function Sidebar({ 
+    userInfo,
+    todayTodos = [],
+    onAddTodo,
+    onRemoveTodo
+}) {
+    const [isReportOpen, setIsReportOpen] = useState(false)
+    const [isGroupAlertOpen, setIsGroupAlertOpen] = useState(false)
+    const [isGroupListOpen, setIsGroupListOpen] = useState(false)
+    
+    const getNavClassName = ({ isActive }) => {
+        return isActive 
+            ? "sidebarNavigationLink sidebarNavigationLinkActive" 
+            : "sidebarNavigationLink"
+    }
+
+    const handleGroupClick = (e) => {
+        const groupId = localStorage.getItem("groupId")
+
+        if (!groupId || groupId === DEFAULT_GROUP_ID) {
+            e.preventDefault()
+            setIsGroupAlertOpen(true)
+        }
+    }
+
+    return (
+        <>
+        <aside className="sidebar">
+            <div className="sidebarTop">
+                <div className="sidebarLogo">
+                    <img src="/images/logo.png" alt="Mollip"/>
+                </div>
+
+                <div className="sidebarUser">
+                    <SidebarUserInfo />
+                </div>
+
+                <button type="button" onClick={() => setIsReportOpen(true)} className="sidebarAI">
+                    <RiSparklingFill className="sidebarNavigationIcon" />
+                    <span>AI 학습 리포트</span>
+                </button>
+
+                <nav className="sidebarNavigation">
+                    <div className="sidebarNavigationGroup">
+                        <p className="sidebarNavigationTitle">DASHBOARD</p>
+
+                        <NavLink to="/home" className={getNavClassName}>
+                            <FiHome className="sidebarNavigationIcon" />
+                            <span>홈</span>
+                        </NavLink>
+
+                        <NavLink to="/records" className={getNavClassName}>
+                            <FiBookOpen className="sidebarNavigationIcon" />
+                            <span>기록</span>
+                        </NavLink>
+
+                        <NavLink to="/weekly" className={getNavClassName}>
+                            <FiBarChart2 className="sidebarNavigationIcon" />
+                            <span>주간 현황</span>
+                        </NavLink>
+                    </div>
+
+                    <div className="sidebarNavigationGroup">
+                        <p className="sidebarNavigationTitle">COMMUNICATION</p>
+
+                        <div className="sidebarGroupNavigationRow">
+                            <NavLink to="/group" className={getNavClassName} onClick={handleGroupClick}>
+                                <FiUsers className="sidebarNavigationIcon" />
+                                <span>그룹</span>
+                            </NavLink>
+                            <button
+                                type="button"
+                                className="sidebarGroupInfoButton"
+                                aria-label="그룹 목록 보기"
+                                onClick={() => setIsGroupListOpen(true)}
+                            >
+                                <FiInfo aria-hidden="true" />
+                            </button>
+                        </div>
+                    </div>
+
+                    <div className="sidebarNavigationGroup">
+                        <p className="sidebarNavigationTitle">SETTINGS</p>
+
+                        <NavLink to="/mypage" className={getNavClassName}>
+                            <FiSettings className="sidebarNavigationIcon" />
+                            <span>마이페이지</span>
+                        </NavLink>
+                    </div>
+                </nav>
+            </div>
+
+            <div className="sidebarBottom">
+                <SidebarTimer />
+
+                <div className="sidebarStreak">
+                    <SidebarStudyStreak />
+                </div>
+
+                <div className="sidebarLogout">
+                    <SidebarLogout userInfo={userInfo} />
+                </div>
+            </div>
+
+            {isReportOpen && (
+                <AiReportModal
+                    onClose={() => setIsReportOpen(false)}
+                    todayTodos={todayTodos}
+                    onAddTodo={onAddTodo}
+                    onRemoveTodo={onRemoveTodo}
+                />
+            )}
+        </aside>
+
+        {/* 공통 경고 팝업 */}
+        <AppAlert
+            open={isGroupAlertOpen}
+            type="warning"
+            title="아직 그룹이 배정되지 않았습니다."
+            message={
+                "그룹 배정을 위해서는 총 공부시간 1시간 이상을 달성해야 합니다.\n" +
+                "그룹은 매주 월요일 주간 공부시간 초기화 시 새롭게 배정됩니다."
+            }
+            onConfirm={() => setIsGroupAlertOpen(false)}
+            onClose={() => setIsGroupAlertOpen(false)}
+        />
+        {isGroupListOpen && (
+            <GroupListModal
+                open
+                onClose={() => setIsGroupListOpen(false)}
+            />
+        )}
+        </>
+    )
+}
+
+export default memo(Sidebar)

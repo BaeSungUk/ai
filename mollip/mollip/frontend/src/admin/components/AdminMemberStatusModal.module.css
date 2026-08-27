@@ -1,0 +1,96 @@
+.sections {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--space-4);
+}
+.section {
+    min-width: 0;
+    padding: 16px;
+    background: var(--color-surface-soft);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+}
+.sectionHeader {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 12px;
+}
+.sectionHeader h3 {
+    margin: 0;
+    color: var(--color-text);
+    font-size: 14px;
+}
+.sectionHeader p {
+    margin: 4px 0 0;
+    color: var(--color-text-muted);
+    font-size: 10px;
+    line-height: 1.45;
+}
+.selectAll {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    padding: 8px 0 10px;
+    color: var(--color-text-secondary);
+    font-size: 14px;
+    border-bottom: 1px solid var(--color-border);
+    cursor: pointer;
+}
+.list {
+    margin-top: 10px;
+    max-height: 340px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
+.member {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    gap: 4px 8px;
+    padding: 10px;
+    background: #fff;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+}
+.member input {
+    grid-row: 1 / span 2;
+    align-self: center;
+    accent-color: var(--color-primary-600);
+}
+.memberName {
+    min-width: 0;
+    color: var(--color-text);
+    font-size: 12px;
+    font-weight: 700;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.memberEmail {
+    min-width: 0;
+    color: var(--color-text-muted);
+    font-size: 10px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.footerContent {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    color: var(--color-text-muted);
+    font-size: 12px;
+}
+@media (max-width: 1000px) {
+    .sections {
+        grid-template-columns: 1fr;
+    }
+    .list {
+        max-height: 220px;
+    }
+}

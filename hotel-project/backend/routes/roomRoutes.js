@@ -1,0 +1,10 @@
+import { Router } from "express";
+import * as c from "../controllers/roomController.js";
+import { asyncHandler as a } from "../utils/asyncHandler.js";
+import { authenticate, requireAdmin } from "../middleware/authMiddleware.js";
+const r = Router();
+r.get("/:roomId", a(c.get));
+r.post("/", authenticate, requireAdmin, a(c.create));
+r.put("/:roomId", authenticate, requireAdmin, a(c.update));
+r.delete("/:roomId", authenticate, requireAdmin, a(c.remove));
+export default r;

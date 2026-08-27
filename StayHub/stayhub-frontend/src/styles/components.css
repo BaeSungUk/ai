@@ -1,0 +1,234 @@
+.page-heading h1 {
+  margin-bottom: 8px;
+}
+
+.full-button {
+  width: 100%;
+}
+
+.success-text {
+  color: #15803d;
+
+  font-size: 14px;
+}
+
+.image-placeholder {
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  color: #2563eb;
+
+  font-size: 22px;
+  font-weight: 800;
+}
+
+.image-placeholder.large {
+  font-size: 40px;
+}
+
+.reservation-search {
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, 1fr);
+
+  gap: 16px;
+}
+
+.input-guide {
+  display: block;
+  margin-top: 6px;
+
+  color: #777;
+  font-size: 13px;
+  font-weight: 400;
+}
+
+.input-guide.valid {
+  color: #16a34a;
+}
+
+.room-owner-actions
+.danger-button {
+  margin-right: 0;
+}
+
+.page-heading {
+  margin-bottom: 30px;
+}
+
+.page-heading h1,
+.my-hotel-heading h1,
+.hotel-form h1,
+.reservation-detail-card h1,
+.complete-card h1,
+.auth-card h1 {
+  color: var(--color-ink);
+  letter-spacing: -1px;
+}
+
+.page-heading p,
+.my-hotel-heading p {
+  color: var(--color-muted);
+}
+
+.primary-button,
+.secondary-button,
+.danger-button {
+  min-height: 44px;
+  border: 1px solid transparent;
+  border-radius: var(--radius-sm);
+  padding: 10px 18px;
+  font-size: 14px;
+  font-weight: 750;
+}
+
+.primary-button {
+  background: var(--color-brand);
+  box-shadow: 0 7px 16px rgba(139, 94, 60, 0.2);
+  color: #fff;
+}
+
+.primary-button:hover {
+  background: var(--color-brand-dark);
+  box-shadow: 0 9px 20px rgba(104, 67, 43, 0.25);
+  transform: translateY(-1px);
+}
+
+.primary-button:disabled {
+
+  cursor: not-allowed;
+  background: #c7b9ac;
+  box-shadow: none;
+  transform: none;
+}
+
+.secondary-button {
+  border-color: var(--color-line);
+  background: #fffaf4;
+  color: var(--color-brand-dark);
+}
+
+.secondary-button:hover {
+  border-color: #cdb9a7;
+  background: var(--color-brand-soft);
+}
+
+.danger-button {
+  color: white;
+
+  margin-right: 15px;
+  background: #a64b42;
+  box-shadow: 0 7px 16px rgba(166, 75, 66, 0.14);
+}
+
+.status-box,
+.info-box {
+  padding: 30px;
+
+  text-align: center;
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-sm);
+  color: var(--color-muted);
+}
+
+.search-box input,
+.search-box select,
+.reservation-search input,
+.reservation-search select,
+.reservation-filter input,
+.hotel-form input,
+.hotel-form textarea,
+.auth-card input,
+.auth-card select,
+.review-form select,
+.review-form textarea {
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-sm);
+  background: #fffefb;
+  color: var(--color-ink);
+}
+
+.search-box input:hover,
+.search-box select:hover,
+.reservation-search input:hover,
+.reservation-search select:hover,
+.hotel-form input:hover,
+.hotel-form textarea:hover,
+.auth-card input:hover,
+.review-form select:hover,
+.review-form textarea:hover {
+  border-color: #cdb9a7;
+}
+
+.search-box input:focus,
+.search-box select:focus,
+.reservation-search input:focus,
+.reservation-search select:focus,
+.reservation-filter input:focus,
+.hotel-form input:focus,
+.hotel-form textarea:focus,
+.auth-card input:focus,
+.review-form select:focus,
+.review-form textarea:focus {
+  border-color: var(--color-brand);
+  box-shadow: 0 0 0 4px rgba(139, 94, 60, 0.1);
+  outline: none;
+}
+
+.detail-header,
+.content-section,
+.reservation-detail-card,
+.complete-card,
+.hotel-form,
+.auth-card,
+.my-hotel-card {
+  border: 1px solid var(--color-line);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-sm);
+}
+
+.room-card,
+.reservation-card,
+.review-card {
+  border-color: var(--color-line);
+  border-radius: var(--radius-md);
+  background: #fffefb;
+}
+
+.room-card:hover,
+.reservation-card:hover {
+  border-color: #cdb9a7;
+  box-shadow: var(--shadow-sm);
+  transform: translateY(-2px);
+}
+
+.availability.available,
+.success-text {
+  color: #557252;
+}
+
+.total-price strong {
+  color: var(--color-brand-dark);
+}
+
+.auth-card,
+.hotel-form,
+.reservation-detail-card,
+.complete-card {
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+}
+
+.auth-link a,
+.secondary-link,
+.danger-text-button {
+  color: var(--color-brand);
+  font-weight: 700;
+}
