@@ -1,6 +1,22 @@
 # Git backups
 .git_backup/
 
+# Local evaluations (keep on disk, exclude from Git)
+/평가/
+
+# Generated results, runtime uploads, and redundant backups
+.gradio/
+/2_DataAnalysis/output/
+/11_CV/2_OpenCV/mix.avi
+/crawling/crawling.zip
+/mollip/백업/
+/X_Project/Server/public/uploads/
+/public_notice_board/Server/public/uploads/
+/mollip/mollip/backend/public/uploads/
+
+# Empty root npm lockfile (project lockfiles remain tracked)
+/package-lock.json
+
 # Secrets and local environment variables
 .env
 .env.*
@@ -44,9 +60,20 @@ coverage/
 # Jupyter
 .ipynb_checkpoints/
 
+# Additional build caches
+.cache/
+.turbo/
+.vite/
+*.tsbuildinfo
+
 # Downloaded datasets (keep source code and notebooks)
 /2_DataAnalysis/data/
 /10_MLDL/data/
+/12_NLP/data/
+/12_NLP/fasttext.bin
+/12_NLP/ratings.txt
+/12_NLP/ratings_total.txt
+/12_NLP/tokenized_data.txt
 
 # Trained models and generated ML output
 *.pth
